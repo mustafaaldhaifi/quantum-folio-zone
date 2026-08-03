@@ -4,7 +4,7 @@ import { Nav } from "@/components/site/nav";
 import { Footer } from "@/components/site/footer";
 import { Reveal } from "@/components/site/reveal";
 import { MagneticButton } from "@/components/site/magnetic-button";
-import { getProject, projects } from "@/lib/portfolio-data";
+import { getProject, projects, type Project } from "@/lib/portfolio-data";
 
 export const Route = createFileRoute("/projects/$slug")({
   loader: ({ params }) => {
@@ -50,7 +50,7 @@ function ProjectNotFound() {
 }
 
 function ProjectPage() {
-  const { project } = Route.useLoaderData();
+  const { project } = Route.useLoaderData() as { project: Project };
   const others = projects.filter((p) => p.slug !== project.slug).slice(0, 3);
 
   return (
