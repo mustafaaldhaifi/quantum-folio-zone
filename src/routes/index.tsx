@@ -1,24 +1,67 @@
 import { createFileRoute } from "@tanstack/react-router";
+import { Nav } from "@/components/site/nav";
+import { Footer } from "@/components/site/footer";
+import { Hero } from "@/components/site/hero";
+import {
+  About,
+  Experience,
+  Skills,
+  Stats,
+  TechStack,
+  Testimonials,
+} from "@/components/site/sections";
+import { AllApplications, FeaturedProjects } from "@/components/site/work";
+import { Contact } from "@/components/site/contact";
 
-// No head() here: the home route inherits title/description/og/twitter from
-// __root.tsx, and ships no og:image so serve-time hosting can inject the
-// project's social preview (explicit og:image or latest screenshot).
+const title = "Aarav Mehta — Full Stack Developer & IT Graduate";
+const description =
+  "Portfolio of Aarav Mehta, a full stack developer and IT graduate building fast, accessible web platforms with React, TypeScript, Node.js and cloud infrastructure.";
+
 export const Route = createFileRoute("/")({
+  head: () => ({
+    meta: [
+      { title },
+      { name: "description", content: description },
+      { property: "og:title", content: title },
+      { property: "og:description", content: description },
+      { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary_large_image" },
+    ],
+    scripts: [
+      {
+        type: "application/ld+json",
+        children: JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "Person",
+          name: "Aarav Mehta",
+          jobTitle: "Full Stack Developer",
+          email: "hello@aaravmehta.dev",
+          alumniOf: "University of Technology",
+          knowsAbout: ["React", "TypeScript", "Node.js", "PostgreSQL", "AWS"],
+        }),
+      },
+    ],
+  }),
   component: Index,
 });
 
-// IMPORTANT: Replace this placeholder. See ./README.md for routing conventions.
 function Index() {
   return (
-    <div
-      className="flex min-h-screen items-center justify-center"
-      style={{ backgroundColor: "#fcfbf8" }}
-    >
-      <img
-        data-lovable-blank-page-placeholder="REMOVE_THIS"
-        src="https://cdn.gpteng.co/blank-app-v1.svg"
-        alt="Your app will live here!"
-      />
+    <div className="min-h-screen">
+      <Nav />
+      <main>
+        <Hero />
+        <About />
+        <Skills />
+        <FeaturedProjects />
+        <AllApplications />
+        <TechStack />
+        <Experience />
+        <Stats />
+        <Testimonials />
+        <Contact />
+      </main>
+      <Footer />
     </div>
   );
 }
