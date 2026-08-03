@@ -19,11 +19,11 @@ export function About() {
       id="about"
       eyebrow="About me"
       title="Engineering rigour, product craft."
-      description={profile.bio[0]}
+      description={profile.bio[0] ?? ""}
     >
       <div className="grid gap-6 lg:grid-cols-[1.4fr_1fr]">
         <Reveal className="glass rounded-3xl p-8">
-          <p className="text-pretty text-muted-foreground">{profile.bio[1]}</p>
+          <p className="text-pretty text-muted-foreground">{profile.bio[1] ?? ""}</p>
           <div className="divider-glow my-7" />
           <dl className="grid gap-6 sm:grid-cols-2">
             <div className="flex items-start gap-3">
