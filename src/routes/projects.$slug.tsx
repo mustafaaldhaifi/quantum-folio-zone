@@ -5,6 +5,7 @@ import { Footer } from "@/components/site/footer";
 import { Reveal } from "@/components/site/reveal";
 import { MagneticButton } from "@/components/site/magnetic-button";
 import { getProject, projects, type Project } from "@/lib/portfolio-data";
+import { useContent, useLanguage } from "@/lib/i18n";
 
 export const Route = createFileRoute("/projects/$slug")({
   loader: ({ params }) => {
@@ -36,13 +37,14 @@ export const Route = createFileRoute("/projects/$slug")({
 });
 
 function ProjectNotFound() {
+  const { t } = useLanguage();
   return (
     <div className="grid min-h-screen place-items-center px-4 text-center">
       <div>
-        <h1 className="text-3xl font-bold">Project not found</h1>
-        <p className="mt-3 text-muted-foreground">This case study doesn't exist.</p>
+        <h1 className="text-3xl font-bold">{t("project.notFound")}</h1>
+        <p className="mt-3 text-muted-foreground">{t("project.notFoundDesc")}</p>
         <Link to="/" className="mt-6 inline-flex text-primary underline">
-          Back to portfolio
+          {t("project.back")}
         </Link>
       </div>
     </div>
@@ -50,8 +52,14 @@ function ProjectNotFound() {
 }
 
 function ProjectPage() {
-  const { project } = Route.useLoaderData() as { project: Project };
-  const others = projects.filter((p) => p.slug !== project.slug).slice(0, 3);
+  const { project: base } = Route.useLoaderData() as { project: Project };
+  const { t } = useLanguage();
+  const { localizeProject, categoryLabel } = useContent();
+  const project = localizeProject(base);
+  const others = projects
+    .filter((p) => p.slug !== project.slug)
+    .slice(0, 3)
+    .map(localizeProject);
 
   return (
     <div className="min-h-screen">
@@ -63,11 +71,11 @@ function ProjectPage() {
               to="/"
               className="inline-flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground"
             >
-              <ArrowLeft className="h-4 w-4" aria-hidden="true" />
-              Back to portfolio
+              <ArrowLeft className="h-4 w-4 rtl:rotate-180" aria-hidden="true" />
+              {t("project.back")}
             </Link>
             <p className="mt-8 font-mono text-xs uppercase tracking-[0.3em] text-accent">
-              {project.category} · {project.year}
+              {categoryLabel(project.category)} · {project.year}
             </p>
             <h1 className="mt-4 text-balance text-4xl font-bold sm:text-6xl">{project.title}</h1>
             <p className="mt-4 max-w-2xl text-pretty text-lg text-muted-foreground">
@@ -76,11 +84,11 @@ function ProjectPage() {
             <div className="mt-8 flex flex-wrap gap-3">
               <MagneticButton href={project.demo}>
                 <ExternalLink className="h-4 w-4" aria-hidden="true" />
-                Live demo
+                {t("project.demo")}
               </MagneticButton>
               <MagneticButton href={project.repo} variant="ghost">
                 <Github className="h-4 w-4" aria-hidden="true" />
-                Source code
+                {t("project.source")}
               </MagneticButton>
             </div>
           </Reveal>
@@ -106,7 +114,7 @@ function ProjectPage() {
 
           <div className="mt-16 grid gap-10 lg:grid-cols-[1.5fr_1fr]">
             <Reveal>
-              <h2 className="text-2xl font-bold">Overview</h2>
+              <h2 className="text-2xl font-bold">{t("project.overview")}</h2>
               <p className="mt-4 text-pretty leading-relaxed text-muted-foreground">
                 {project.overview}
               </p>
@@ -114,15 +122,15 @@ function ProjectPage() {
             <Reveal delay={0.1} className="glass h-fit rounded-3xl p-7">
               <dl className="grid gap-5 text-sm">
                 <div>
-                  <dt className="text-muted-foreground">Role</dt>
+                  <dt className="text-muted-foreground">{t("project.role")}</dt>
                   <dd className="mt-1 font-semibold">{project.role}</dd>
                 </div>
                 <div>
-                  <dt className="text-muted-foreground">Duration</dt>
+                  <dt className="text-muted-foreground">{t("project.duration")}</dt>
                   <dd className="mt-1 font-semibold">{project.duration}</dd>
                 </div>
                 <div>
-                  <dt className="text-muted-foreground">Technologies</dt>
+                  <dt className="text-muted-foreground">{t("project.tech")}</dt>
                   <dd className="mt-2 flex flex-wrap gap-2">
                     {project.stack.map((t) => (
                       <span
@@ -140,7 +148,7 @@ function ProjectPage() {
 
           <section className="mt-16">
             <Reveal>
-              <h2 className="text-2xl font-bold">Key features</h2>
+              <h2 className="text-2xl font-bold">{t("project.features")}</h2>
             </Reveal>
             <div className="mt-8 grid gap-6 sm:grid-cols-2">
               {project.features.map((f, i) => (
@@ -154,7 +162,7 @@ function ProjectPage() {
 
           <section className="mt-20">
             <Reveal>
-              <h2 className="text-2xl font-bold">More projects</h2>
+              <h2 className="text-2xl font-bold">{t("project.more")}</h2>
             </Reveal>
             <div className="mt-8 grid gap-4 sm:grid-cols-3">
               {others.map((p, i) => (
@@ -165,7 +173,7 @@ function ProjectPage() {
                     className="glass hover-lift block rounded-3xl p-6"
                   >
                     <p className="font-mono text-[11px] uppercase tracking-wider text-accent">
-                      {p.category}
+                      {categoryLabel(p.category)}
                     </p>
                     <p className="mt-2 font-semibold">{p.title}</p>
                     <p className="mt-1 text-sm text-muted-foreground">{p.tagline}</p>
