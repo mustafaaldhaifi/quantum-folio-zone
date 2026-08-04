@@ -3,16 +3,20 @@ import { AnimatePresence, motion } from "motion/react";
 import { Section } from "./section";
 import { ProjectCard } from "./project-card";
 import { Reveal } from "./reveal";
-import { categories, projects } from "@/lib/portfolio-data";
+import { categories } from "@/lib/portfolio-data";
+import { useContent, useLanguage } from "@/lib/i18n";
 
 export function FeaturedProjects() {
+  const { t } = useLanguage();
+  const { projects } = useContent();
   const featured = projects.filter((p) => p.featured);
+
   return (
     <Section
       id="work"
-      eyebrow="Selected work"
-      title="Featured projects"
-      description="Three products where I owned architecture, interface and delivery end to end."
+      eyebrow={t("work.eyebrow")}
+      title={t("work.title")}
+      description={t("work.description")}
     >
       <div className="grid gap-6 lg:grid-cols-3">
         {featured.map((p, i) => (
@@ -26,15 +30,17 @@ export function FeaturedProjects() {
 }
 
 export function AllApplications() {
+  const { t } = useLanguage();
+  const { projects, categoryLabel } = useContent();
   const [active, setActive] = useState<string>("All");
   const filtered = active === "All" ? projects : projects.filter((p) => p.category === active);
 
   return (
     <Section
       id="applications"
-      eyebrow="Archive"
-      title="All applications"
-      description="Everything shipped across platforms, commerce, AI and mobile."
+      eyebrow={t("apps.eyebrow")}
+      title={t("apps.title")}
+      description={t("apps.description")}
     >
       <div className="flex flex-wrap gap-2">
         {categories.map((c) => (
@@ -49,7 +55,7 @@ export function AllApplications() {
                 : "glass text-muted-foreground hover:text-foreground"
             }`}
           >
-            {c}
+            {categoryLabel(c)}
           </button>
         ))}
       </div>
