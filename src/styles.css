@@ -213,3 +213,19 @@
     }
   }
 }
+
+@layer base {
+  [dir="rtl"] body,
+  [dir="rtl"] h1,
+  [dir="rtl"] h2,
+  [dir="rtl"] h3,
+  [dir="rtl"] h4 {
+    font-family: "Tajawal", var(--font-sans);
+    letter-spacing: 0;
+  }
+
+  [dir="rtl"] .font-mono {
+    font-family: "Tajawal", var(--font-sans);
+    letter-spacing: 0;
+  }
+}
