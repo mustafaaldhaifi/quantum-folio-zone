@@ -13,9 +13,9 @@ import {
 import { AllApplications, FeaturedProjects } from "@/components/site/work";
 import { Contact } from "@/components/site/contact";
 
-const title = "Aarav Mehta — Full Stack Developer & IT Graduate";
+const title = "Mustafa Aldhaifi — Full Stack Developer & IT Graduate";
 const description =
-  "Portfolio of Aarav Mehta, a full stack developer and IT graduate building fast, accessible web platforms with React, TypeScript, Node.js and cloud infrastructure.";
+  "Portfolio of Mustafa Aldhaifi, a full stack developer and IT graduate building fast, accessible web platforms with React, TypeScript, Node.js and cloud infrastructure.";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -33,9 +33,9 @@ export const Route = createFileRoute("/")({
         children: JSON.stringify({
           "@context": "https://schema.org",
           "@type": "Person",
-          name: "Aarav Mehta",
+          name: "Mustafa Aldhaifi",
           jobTitle: "Full Stack Developer",
-          email: "hello@aaravmehta.dev",
+          email: "hello@mustafaaldhaifi.dev",
           alumniOf: "University of Technology",
           knowsAbout: ["React", "TypeScript", "Node.js", "PostgreSQL", "AWS"],
         }),

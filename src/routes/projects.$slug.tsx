@@ -19,7 +19,7 @@ export const Route = createFileRoute("/projects/$slug")({
       };
     }
     const { project } = loaderData;
-    const title = `${project.title} — Case study by Aarav Mehta`;
+    const title = `${project.title} — Case study by Mustafa Aldhaifi`;
     return {
       meta: [
         { title },

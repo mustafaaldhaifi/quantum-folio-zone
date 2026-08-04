@@ -81,18 +81,18 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "Aarav Mehta — Full Stack Developer" },
+      { title: "Mustafa Aldhaifi — Full Stack Developer" },
       {
         name: "description",
         content:
-          "Portfolio of Aarav Mehta, full stack developer and IT graduate building premium web platforms.",
+          "Portfolio of Mustafa Aldhaifi, full stack developer and IT graduate building premium web platforms.",
       },
-      { name: "author", content: "Aarav Mehta" },
-      { property: "og:title", content: "Aarav Mehta — Full Stack Developer" },
+      { name: "author", content: "Mustafa Aldhaifi" },
+      { property: "og:title", content: "Mustafa Aldhaifi — Full Stack Developer" },
       {
         property: "og:description",
         content:
-          "Portfolio of Aarav Mehta, full stack developer and IT graduate building premium web platforms.",
+          "Portfolio of Mustafa Aldhaifi, full stack developer and IT graduate building premium web platforms.",
       },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
