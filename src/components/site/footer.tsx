@@ -1,14 +1,17 @@
 import { Github, Linkedin, Mail, Twitter } from "lucide-react";
-import { profile } from "@/lib/portfolio-data";
+import { useContent, useLanguage } from "@/lib/i18n";
 
 export function Footer() {
+  const { t } = useLanguage();
+  const { profile } = useContent();
+
   return (
     <footer className="relative border-t border-border/60 px-4 py-14">
       <div className="mx-auto grid max-w-6xl gap-8 md:grid-cols-[1fr_auto] md:items-end">
         <div>
           <p className="font-display text-2xl font-bold tracking-tight">{profile.name}</p>
           <p className="mt-2 max-w-sm text-sm text-muted-foreground">
-            {profile.role} · {profile.degree}. Building fast, accessible products for the web.
+            {profile.role} · {profile.degree}. {t("footer.tagline")}
           </p>
         </div>
         <div className="flex items-center gap-3">
@@ -31,8 +34,8 @@ export function Footer() {
       </div>
       <div className="divider-glow mx-auto my-8 max-w-6xl" />
       <div className="mx-auto flex max-w-6xl flex-col gap-2 text-xs text-muted-foreground sm:flex-row sm:items-center sm:justify-between">
-        <p>© {new Date().getFullYear()} {profile.name}. All rights reserved.</p>
-        <p>Designed and built with React, Tailwind CSS and Motion.</p>
+        <p>© {new Date().getFullYear()} {profile.name}. {t("footer.rights")}</p>
+        <p>{t("footer.built")}</p>
       </div>
     </footer>
   );

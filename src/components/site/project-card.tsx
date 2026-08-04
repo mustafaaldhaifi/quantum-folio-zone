@@ -1,8 +1,10 @@
 import { Link } from "@tanstack/react-router";
 import { ArrowUpRight } from "lucide-react";
 import type { Project } from "@/lib/portfolio-data";
+import { useContent } from "@/lib/i18n";
 
 export function ProjectCard({ project, large = false }: { project: Project; large?: boolean }) {
+  const { categoryLabel } = useContent();
   return (
     <Link
       to="/projects/$slug"
@@ -21,8 +23,8 @@ export function ProjectCard({ project, large = false }: { project: Project; larg
           }`}
         />
         <div className="absolute inset-x-0 bottom-0 h-24 bg-gradient-to-t from-card to-transparent opacity-80" />
-        <span className="glass absolute left-4 top-4 rounded-full px-3 py-1 font-mono text-[11px] uppercase tracking-wider">
-          {project.category}
+        <span className="glass absolute start-4 top-4 rounded-full px-3 py-1 font-mono text-[11px] uppercase tracking-wider">
+          {categoryLabel(project.category)}
         </span>
       </div>
 

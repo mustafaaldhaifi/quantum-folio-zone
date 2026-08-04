@@ -1,20 +1,22 @@
 import { Link } from "@tanstack/react-router";
-import { Menu, X } from "lucide-react";
+import { Languages, Menu, X } from "lucide-react";
 import { useEffect, useState } from "react";
 import { ThemeToggle } from "./theme-toggle";
-import { profile } from "@/lib/portfolio-data";
-
-const links = [
-  { label: "About", href: "/#about" },
-  { label: "Skills", href: "/#skills" },
-  { label: "Work", href: "/#work" },
-  { label: "Experience", href: "/#experience" },
-  { label: "Contact", href: "/#contact" },
-];
+import { useContent, useLanguage } from "@/lib/i18n";
 
 export function Nav() {
   const [open, setOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const { t, lang, toggleLang } = useLanguage();
+  const { profile } = useContent();
+
+  const links = [
+    { label: t("nav.about"), href: "/#about" },
+    { label: t("nav.skills"), href: "/#skills" },
+    { label: t("nav.work"), href: "/#work" },
+    { label: t("nav.experience"), href: "/#experience" },
+    { label: t("nav.contact"), href: "/#contact" },
+  ];
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 24);
@@ -33,12 +35,12 @@ export function Nav() {
       >
         <Link to="/" className="flex min-w-0 items-center gap-2 font-display text-sm font-bold">
           <span className="grid h-8 w-8 shrink-0 place-items-center rounded-full bg-primary font-mono text-primary-foreground">
-            AM
+            MA
           </span>
           <span className="truncate">{profile.name}</span>
         </Link>
 
-        <ul className="ml-auto hidden items-center gap-1 md:flex">
+        <ul className="ms-auto hidden items-center gap-1 md:flex">
           {links.map((l) => (
             <li key={l.href}>
               <a
@@ -51,12 +53,22 @@ export function Nav() {
           ))}
         </ul>
 
-        <div className="ml-auto flex shrink-0 items-center gap-2 md:ml-0">
+        <div className="ms-auto flex shrink-0 items-center gap-2 md:ms-0">
+          <button
+            type="button"
+            onClick={toggleLang}
+            aria-label={t("nav.language")}
+            title={t("nav.language")}
+            className="glass inline-flex h-10 items-center gap-1.5 rounded-full px-3 text-xs font-semibold"
+          >
+            <Languages className="h-4 w-4" aria-hidden="true" />
+            {lang === "en" ? "العربية" : "EN"}
+          </button>
           <ThemeToggle />
           <button
             type="button"
             onClick={() => setOpen((v) => !v)}
-            aria-label={open ? "Close menu" : "Open menu"}
+            aria-label={open ? t("nav.closeMenu") : t("nav.openMenu")}
             aria-expanded={open}
             className="glass grid h-10 w-10 place-items-center rounded-full md:hidden"
           >

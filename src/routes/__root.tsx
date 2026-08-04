@@ -14,6 +14,7 @@ import { AnimatePresence, motion } from "motion/react";
 import appCss from "../styles.css?url";
 import { Toaster } from "../components/ui/sonner";
 import { ScrollProgress } from "../components/site/scroll-progress";
+import { LanguageProvider } from "../lib/i18n";
 import { reportLovableError } from "../lib/lovable-error-reporting";
 
 function NotFoundComponent() {
@@ -81,18 +82,18 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "Aarav Mehta — Full Stack Developer" },
+      { title: "Mustafa Aldhaifi — Full Stack Developer" },
       {
         name: "description",
         content:
-          "Portfolio of Aarav Mehta, full stack developer and IT graduate building premium web platforms.",
+          "Portfolio of Mustafa Aldhaifi, full stack developer and IT graduate building premium web platforms.",
       },
-      { name: "author", content: "Aarav Mehta" },
-      { property: "og:title", content: "Aarav Mehta — Full Stack Developer" },
+      { name: "author", content: "Mustafa Aldhaifi" },
+      { property: "og:title", content: "Mustafa Aldhaifi — Full Stack Developer" },
       {
         property: "og:description",
         content:
-          "Portfolio of Aarav Mehta, full stack developer and IT graduate building premium web platforms.",
+          "Portfolio of Mustafa Aldhaifi, full stack developer and IT graduate building premium web platforms.",
       },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
@@ -108,7 +109,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { rel: "preconnect", href: "https://fonts.gstatic.com", crossOrigin: "anonymous" },
       {
         rel: "stylesheet",
-        href: "https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=DM+Sans:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap",
+        href: "https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=DM+Sans:wght@400;500;600&family=JetBrains+Mono:wght@400;500&family=Tajawal:wght@400;500;700&display=swap",
       },
     ],
   }),
@@ -155,11 +156,13 @@ function RootComponent() {
 
   return (
     <QueryClientProvider client={queryClient}>
+      <LanguageProvider>
       <ScrollProgress />
       {/* Required: nested routes render here. Removing <Outlet /> breaks all child routes. */}
       <PageTransition>
         <Outlet />
       </PageTransition>
+      </LanguageProvider>
     </QueryClientProvider>
   );
 }

@@ -22,11 +22,11 @@ export type Project = {
 };
 
 export const profile = {
-  name: "Aarav Mehta",
+  name: "Mustafa Aldhaifi",
   role: "Full Stack Developer",
   degree: "B.Sc. Information Technology",
-  location: "Remote · Bengaluru, IN",
-  email: "hello@aaravmehta.dev",
+  location: "Remote · Sana'a, YE",
+  email: "hello@mustafaaldhaifi.dev",
   typing: [
     "Full Stack Developer",
     "React & Node Specialist",
@@ -93,7 +93,7 @@ export const experience = [
 export const testimonials = [
   {
     quote:
-      "Aarav shipped our analytics rewrite three weeks early and it's the fastest surface we own. He thinks like a product owner, not a ticket taker.",
+      "Mustafa shipped our analytics rewrite three weeks early and it's the fastest surface we own. He thinks like a product owner, not a ticket taker.",
     name: "Priya Raghavan",
     title: "VP Engineering, Northlight Labs",
   },

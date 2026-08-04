@@ -3,12 +3,18 @@ import { motion } from "motion/react";
 import { ArrowDown, Sparkles } from "lucide-react";
 import { Particles } from "./particles";
 import { MagneticButton } from "./magnetic-button";
-import { profile } from "@/lib/portfolio-data";
+import { useContent, useLanguage } from "@/lib/i18n";
 
 function useTyping(words: string[]) {
   const [index, setIndex] = useState(0);
   const [text, setText] = useState("");
   const [deleting, setDeleting] = useState(false);
+
+  useEffect(() => {
+    setText("");
+    setDeleting(false);
+    setIndex(0);
+  }, [words]);
 
   useEffect(() => {
     const word = words[index % words.length] ?? "";
@@ -35,6 +41,8 @@ function useTyping(words: string[]) {
 }
 
 export function Hero() {
+  const { t } = useLanguage();
+  const { profile } = useContent();
   const typed = useTyping(profile.typing);
 
   return (
@@ -52,7 +60,7 @@ export function Hero() {
           className="glass mx-auto inline-flex items-center gap-2 rounded-full px-4 py-1.5 text-xs text-muted-foreground"
         >
           <Sparkles className="h-3.5 w-3.5 text-accent" aria-hidden="true" />
-          Available for full-time and freelance work
+          {t("hero.badge")}
         </motion.div>
 
         <motion.h1
@@ -64,7 +72,7 @@ export function Hero() {
           {profile.name}
           <span className="mt-3 block gradient-text text-3xl sm:text-5xl">
             {typed}
-            <span className="animate-caret ml-1 inline-block h-[0.9em] w-[3px] translate-y-[0.08em] bg-accent align-middle" />
+            <span className="animate-caret ms-1 inline-block h-[0.9em] w-[3px] translate-y-[0.08em] bg-accent align-middle" />
           </span>
         </motion.h1>
 
@@ -74,8 +82,7 @@ export function Hero() {
           transition={{ duration: 0.8, delay: 0.25 }}
           className="mx-auto mt-6 max-w-xl text-pretty text-base text-muted-foreground sm:text-lg"
         >
-          IT graduate turned product engineer. I design and ship end-to-end web platforms —
-          typed, tested, and tuned to sub-second loads.
+          {t("hero.lead")}
         </motion.p>
 
         <motion.div
@@ -84,15 +91,15 @@ export function Hero() {
           transition={{ duration: 0.8, delay: 0.35 }}
           className="mt-9 flex flex-wrap items-center justify-center gap-3"
         >
-          <MagneticButton href="#work">View selected work</MagneticButton>
+          <MagneticButton href="#work">{t("hero.cta1")}</MagneticButton>
           <MagneticButton href="#contact" variant="ghost">
-            Get in touch
+            {t("hero.cta2")}
           </MagneticButton>
         </motion.div>
 
         <motion.a
           href="#about"
-          aria-label="Scroll to about section"
+          aria-label={t("hero.scroll")}
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 1 }}
