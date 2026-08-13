@@ -18,9 +18,9 @@ export function FeaturedProjects() {
       title={t("work.title")}
       description={t("work.description")}
     >
-      <div className="grid gap-6 lg:grid-cols-3">
+      <div className="grid items-stretch gap-6 lg:grid-cols-3">
         {featured.map((p, i) => (
-          <Reveal key={p.slug} delay={i * 0.1}>
+          <Reveal key={p.slug} delay={i * 0.1} className="h-full">
             <ProjectCard project={p} large />
           </Reveal>
         ))}
@@ -60,12 +60,13 @@ export function AllApplications() {
         ))}
       </div>
 
-      <motion.div layout className="mt-8 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+      <motion.div layout className="mt-8 grid items-stretch gap-6 sm:grid-cols-2 lg:grid-cols-3">
         <AnimatePresence mode="popLayout">
           {filtered.map((p) => (
             <motion.div
               key={p.slug}
               layout
+              className="h-full"
               initial={{ opacity: 0, scale: 0.96 }}
               animate={{ opacity: 1, scale: 1 }}
               exit={{ opacity: 0, scale: 0.96 }}
