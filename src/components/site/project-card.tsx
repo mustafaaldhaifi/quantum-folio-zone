@@ -9,7 +9,7 @@ export function ProjectCard({ project, large = false }: { project: Project; larg
     <Link
       to="/projects/$slug"
       params={{ slug: project.slug }}
-      className="glass hover-lift group block overflow-hidden rounded-3xl"
+      className="glass hover-lift group flex h-full flex-col overflow-hidden rounded-3xl"
     >
       <div className="relative overflow-hidden">
         <img
@@ -28,18 +28,20 @@ export function ProjectCard({ project, large = false }: { project: Project; larg
         </span>
       </div>
 
-      <div className="p-6">
+      <div className="flex flex-1 flex-col p-6">
         <div className="grid grid-cols-[minmax(0,1fr)_auto] items-start gap-4">
           <div className="min-w-0">
             <h3 className="truncate text-lg font-semibold">{project.title}</h3>
-            <p className="mt-1 text-sm text-muted-foreground">{project.tagline}</p>
+            <p className="mt-1 line-clamp-2 min-h-[2.5rem] text-sm text-muted-foreground">
+              {project.tagline}
+            </p>
           </div>
           <span className="grid h-9 w-9 shrink-0 place-items-center rounded-full border border-border transition-colors group-hover:border-primary group-hover:text-primary">
             <ArrowUpRight className="h-4 w-4" aria-hidden="true" />
           </span>
         </div>
 
-        <ul className="mt-5 flex flex-wrap gap-2">
+        <ul className="mt-auto flex flex-wrap gap-2 pt-5">
           {project.stack.slice(0, 4).map((t) => (
             <li
               key={t}
