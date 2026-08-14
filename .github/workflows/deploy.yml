@@ -32,7 +32,7 @@ jobs:
         run: bun install
 
       - name: Build project
-        run: bun run build
+        run: NITRO_PRESET=static NITRO_PRERENDER=true bun run build
 
       - name: Setup Pages
         uses: actions/configure-pages@v4
