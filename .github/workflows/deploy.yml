@@ -2,7 +2,7 @@ name: Deploy to GitHub Pages
 
 on:
   push:
-    branches: ["main"] # أو master حسب اسم الفرع الرئيسي لديك
+    branches: ["main"]
 
 permissions:
   contents: read
@@ -32,7 +32,16 @@ jobs:
         run: bun install
 
       - name: Build project
-        run: NITRO_PRESET=static NITRO_PRERENDER=true bun run build
+        # تشغيل بناء Vite القياسي
+        run: bun run build
+
+      - name: Create index.html fallback for GitHub Pages
+        run: |
+          # نتحقق من وجود index.html أو ننسخه للعمل كـ SPA
+          if [ -f .output/public/index.html ]; then
+            cp .output/public/index.html .output/public/404.html
+          fi
+          touch .output/public/.nojekyll
 
       - name: Setup Pages
         uses: actions/configure-pages@v4
@@ -40,7 +49,6 @@ jobs:
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          # نحدد مجلد المخرجات المباشر الذي ينتجه Nitro/Vite لديك
           path: './.output/public'
 
       - name: Deploy to GitHub Pages
