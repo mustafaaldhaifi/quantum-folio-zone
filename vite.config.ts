@@ -13,7 +13,5 @@ export default defineConfig({
     server: { entry: "server" },
     
   },
- vite: {
-    base: "/quantum-folio-zone/",
-  },
+
 });
